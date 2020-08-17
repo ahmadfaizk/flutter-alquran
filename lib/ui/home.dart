@@ -1,5 +1,6 @@
 import 'package:alquran/bloc/bloc.dart';
 import 'package:alquran/model/models.dart';
+import 'package:alquran/ui/ui.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
@@ -22,33 +23,26 @@ class Home extends StatelessWidget {
           if (state is LoadingState) {
             return Center(child: CircularProgressIndicator());
           } else if (state is SuccessState<List<Chapter>>) {
-            return ListView.builder(
+            return ListView.separated(
+              separatorBuilder: (context, index) => Divider(),
               itemCount: state.data.length,
               itemBuilder: (context, index) {
                 var chapter = state.data[index];
                 return Container(
-                    margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
+                    margin: EdgeInsets.symmetric(horizontal: 8),
                     child: GestureDetector(
-                      child: Card(
-                          child: Padding(
-                        padding: const EdgeInsets.all(8.0),
+                      child: Padding(
+                        padding: const EdgeInsets.all(4.0),
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.start,
                           children: [
-                            Container(
-                              width: 40,
-                              height: 40,
-                              padding: EdgeInsets.all(4),
-                              decoration: BoxDecoration(
-                                  border:
-                                      Border.all(color: Colors.green, width: 3),
-                                  borderRadius: BorderRadius.circular(16)),
-                              child: Center(
-                                  child:
-                                      Text(chapter.chapterNumber.toString())),
+                            OctagonalContainer(
+                              size: 45,
+                              borderWidth: 3,
+                              child: Text(chapter.chapterNumber.toString()),
                             ),
                             Container(
-                              margin: EdgeInsets.only(left: 16),
+                              margin: EdgeInsets.only(left: 8),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
@@ -68,7 +62,7 @@ class Home extends StatelessWidget {
                             )
                           ],
                         ),
-                      )),
+                      ),
                       onTap: () {
                         Get.toNamed(
                             '/surah?name=${chapter.nameSimple}&id=${chapter.chapterNumber}');
