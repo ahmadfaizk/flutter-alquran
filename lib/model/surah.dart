@@ -10,7 +10,7 @@ class Surah extends Equatable {
   final String revelationType;
   final List<Ayah> ayahs;
 
-  Surah(
+  const Surah(
       {this.number,
       this.name,
       this.englishName,
@@ -38,9 +38,4 @@ class Surah extends Equatable {
 
   @override
   List<Object> get props => [number, name];
-
-  @override
-  String toString() {
-    return name;
-  }
 }

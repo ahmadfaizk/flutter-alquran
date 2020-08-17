@@ -5,7 +5,7 @@ class MultipleResponse<T> extends Equatable {
   final String status;
   final List<T> data;
 
-  MultipleResponse({this.code, this.status, this.data});
+  const MultipleResponse({this.code, this.status, this.data});
 
   factory MultipleResponse.fromJson(Map<String, dynamic> json) {
     return MultipleResponse(

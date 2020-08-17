@@ -1,3 +1,4 @@
+import 'package:alquran/model/sajda.dart';
 import 'package:equatable/equatable.dart';
 
 class Ayah extends Equatable {
@@ -9,9 +10,9 @@ class Ayah extends Equatable {
   final int page;
   final int ruku;
   final int hizbQuarter;
-  final bool sajda;
+  final dynamic sajda;
 
-  Ayah(
+  const Ayah(
       {this.number,
       this.text,
       this.numberInSurah,
@@ -23,6 +24,9 @@ class Ayah extends Equatable {
       this.sajda});
 
   factory Ayah.fromJson(Map<String, dynamic> json) {
+    if (!(json['sajda'] is bool)) {
+      json['sajda'] = Sajda.fromJson(json['sajda']);
+    }
     return Ayah(
         number: json['number'],
         text: json['text'],

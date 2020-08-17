@@ -5,7 +5,7 @@ class SingleResponse<T> extends Equatable {
   final String status;
   final T data;
 
-  SingleResponse({this.code, this.status, this.data});
+  const SingleResponse({this.code, this.status, this.data});
 
   factory SingleResponse.fromJson(Map<String, dynamic> json) {
     return SingleResponse(

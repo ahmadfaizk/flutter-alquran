@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:alquran/model/models.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,7 +26,8 @@ class RemoteDataSource {
     String url = "$_baseUrl/surah/$number";
     var response = await httpClient.get(url);
     var object = json.decode(response.body);
-
+    var surah = Surah.fromJson(object['data']);
+    object['data'] = surah;
     return SingleResponse<Surah>.fromJson(object);
   }
 }

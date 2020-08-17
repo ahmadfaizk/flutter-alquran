@@ -10,4 +10,9 @@ class QuranRepository implements QuranDataSource {
   Future<MultipleResponse<Surah>> getListSurahs() async {
     return await remoteDataSource.getListSurahs();
   }
+
+  @override
+  Future<SingleResponse<Surah>> getDetailSurah(int number) async {
+    return await remoteDataSource.getDetailSurah(number);
+  }
 }
