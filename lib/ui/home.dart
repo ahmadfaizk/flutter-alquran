@@ -1,5 +1,5 @@
 import 'package:alquran/bloc/bloc.dart';
-import 'package:alquran/model/surah.dart';
+import 'package:alquran/model/models.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/route_manager.dart';
@@ -7,25 +7,25 @@ import 'package:get/route_manager.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    context.bloc<SurahBloc>().add(FetchEvent());
+    context.bloc<ChapterBloc>().add(FetchEvent());
     return Scaffold(
       appBar: AppBar(
         title: Text("Al Quran"),
       ),
-      body: BlocConsumer<SurahBloc, BaseState>(
+      body: BlocConsumer<ChapterBloc, BaseState>(
         listener: (context, state) {
           if (state is EmptyState) {
-            context.bloc<SurahBloc>().add(FetchEvent());
+            context.bloc<ChapterBloc>().add(FetchEvent());
           }
         },
         builder: (context, state) {
           if (state is LoadingState) {
             return Center(child: CircularProgressIndicator());
-          } else if (state is SuccessState<List<Surah>>) {
+          } else if (state is SuccessState<List<Chapter>>) {
             return ListView.builder(
               itemCount: state.data.length,
               itemBuilder: (context, index) {
-                var surah = state.data[index];
+                var chapter = state.data[index];
                 return Container(
                     margin: EdgeInsets.fromLTRB(8, 4, 8, 4),
                     child: GestureDetector(
@@ -43,23 +43,24 @@ class Home extends StatelessWidget {
                                   border:
                                       Border.all(color: Colors.green, width: 3),
                                   borderRadius: BorderRadius.circular(16)),
-                              child:
-                                  Center(child: Text(surah.number.toString())),
+                              child: Center(
+                                  child:
+                                      Text(chapter.chapterNumber.toString())),
                             ),
                             Container(
                               margin: EdgeInsets.only(left: 16),
                               child: Column(
                                 crossAxisAlignment: CrossAxisAlignment.start,
                                 children: [
-                                  Text(surah.englishName),
-                                  Text(surah.englishNameTranslation)
+                                  Text(chapter.nameSimple),
+                                  Text(chapter.translatedName.name)
                                 ],
                               ),
                             ),
                             Expanded(
                               child: Container(
                                 child: Text(
-                                  surah.name,
+                                  chapter.nameArabic,
                                   textAlign: TextAlign.right,
                                   style: TextStyle(fontSize: 16),
                                 ),
@@ -68,8 +69,10 @@ class Home extends StatelessWidget {
                           ],
                         ),
                       )),
-                      onTap: () => Get.toNamed(
-                          'surah?name=${surah.englishName}&id=${surah.number}'),
+                      onTap: () {
+                        Get.toNamed(
+                            '/surah?name=${chapter.nameSimple}&id=${chapter.chapterNumber}');
+                      },
                     ));
               },
             );
@@ -82,7 +85,7 @@ class Home extends StatelessWidget {
                   RaisedButton(
                     child: Text("Refresh"),
                     onPressed: () =>
-                        context.bloc<SurahBloc>().add(FetchEvent()),
+                        context.bloc<ChapterBloc>().add(FetchEvent()),
                   )
                 ],
               ),

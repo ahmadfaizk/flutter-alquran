@@ -36,7 +36,8 @@ class SurahLayout extends StatelessWidget {
                         ayahs[index].text,
                         overflow: TextOverflow.visible,
                         textAlign: TextAlign.end,
-                        style: TextStyle(fontSize: 32),
+                        style: TextStyle(
+                            fontSize: 48, fontFamily: 'Arabic TypeSetting'),
                       ),
                     );
                   },

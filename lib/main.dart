@@ -1,5 +1,4 @@
 import 'package:alquran/bloc/bloc.dart';
-import 'package:alquran/bloc/surah_bloc.dart';
 import 'package:alquran/repository/repository.dart';
 import 'package:alquran/ui/ui.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,8 @@ void main() {
 
 class MyApp extends StatelessWidget {
   final QuranRepository repository = QuranRepository(
-      remoteDataSource: RemoteDataSource(httpClient: http.Client()));
+      remoteDataSource: RemoteDataSource(httpClient: http.Client()),
+      localDataSouce: LocalDataSouce());
 
   @override
   Widget build(BuildContext context) {
@@ -25,6 +25,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<DetailSurahBloc>(
           create: (context) => DetailSurahBloc(repository: repository),
+        ),
+        BlocProvider<ChapterBloc>(
+          create: (context) => ChapterBloc(repository: repository),
         )
       ],
       child: GetMaterialApp(

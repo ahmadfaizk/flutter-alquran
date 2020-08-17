@@ -1,10 +1,13 @@
 import 'package:alquran/model/models.dart';
 import 'package:alquran/repository/repository.dart';
+import 'package:flutter/foundation.dart';
 
 class QuranRepository implements QuranDataSource {
   final RemoteDataSource remoteDataSource;
+  final LocalDataSouce localDataSouce;
 
-  QuranRepository({this.remoteDataSource});
+  QuranRepository(
+      {@required this.remoteDataSource, @required this.localDataSouce});
 
   @override
   Future<MultipleResponse<Surah>> getListSurahs() async {
@@ -12,7 +15,12 @@ class QuranRepository implements QuranDataSource {
   }
 
   @override
-  Future<SingleResponse<Surah>> getDetailSurah(int number) async {
-    return await remoteDataSource.getDetailSurah(number);
+  Future<Surah> getDetailSurah(int number) async {
+    return await localDataSouce.getDetailSurah(number);
+  }
+
+  @override
+  Future<List<Chapter>> getListChapters() async {
+    return await localDataSouce.getListChapters();
   }
 }
