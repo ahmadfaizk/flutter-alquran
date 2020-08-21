@@ -6,3 +6,4 @@ export './juz.dart';
 export './surah.dart';
 export './chapter.dart';
 export './translated_name.dart';
+export './verse.dart';

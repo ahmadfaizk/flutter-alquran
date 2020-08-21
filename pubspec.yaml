@@ -54,7 +54,7 @@ flutter:
   assets:
     - assets/bismillah.json
     - assets/chapters.json
-    - assets/quran-simple.json
+    - assets/quran.json
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 
@@ -73,6 +73,9 @@ flutter:
     - family: Arabic TypeSetting
       fonts:
         - asset: fonts/arabtype.ttf
+    - family: Uthman Naskh
+      fonts:
+        - asset: fonts/KFGQPC Uthman Taha Naskh Regular.ttf
   #   - family: Schyler
   #     fonts:
   #       - asset: fonts/Schyler-Regular.ttf

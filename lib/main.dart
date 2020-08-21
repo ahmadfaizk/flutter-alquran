@@ -1,4 +1,5 @@
 import 'package:alquran/bloc/bloc.dart';
+import 'package:alquran/bloc/verse_bloc.dart';
 import 'package:alquran/repository/repository.dart';
 import 'package:alquran/ui/ui.dart';
 import 'package:flutter/material.dart';
@@ -28,6 +29,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<ChapterBloc>(
           create: (context) => ChapterBloc(repository: repository),
+        ),
+        BlocProvider<VerseBloc>(
+          create: (context) => VerseBloc(repository: repository),
         )
       ],
       child: GetMaterialApp(

@@ -1,4 +1,5 @@
 import 'package:alquran/model/translated_name.dart';
+import 'package:alquran/model/verse.dart';
 import 'package:equatable/equatable.dart';
 
 class Chapter extends Equatable {
@@ -13,6 +14,7 @@ class Chapter extends Equatable {
   final int versesCount;
   final List<dynamic> pages;
   final TranslatedName translatedName;
+  final List<Verse> verses;
 
   const Chapter(
       {this.id,
@@ -25,9 +27,14 @@ class Chapter extends Equatable {
       this.nameSimple,
       this.versesCount,
       this.pages,
-      this.translatedName});
+      this.translatedName,
+      this.verses});
 
   factory Chapter.fromJson(Map<String, dynamic> json) {
+    if (json['verses'] != null) {
+      json['verses'] = List.generate(json['verses'].length,
+          (index) => Verse.fromJson(json['verses'][index]));
+    }
     return Chapter(
         id: json['id'],
         chapterNumber: json['chapter_number'],
@@ -39,7 +46,8 @@ class Chapter extends Equatable {
         nameSimple: json['name_simple'],
         versesCount: json['verses_count'],
         pages: json['pages'],
-        translatedName: TranslatedName.fromJson(json['translated_name']));
+        translatedName: TranslatedName.fromJson(json['translated_name']),
+        verses: json['verses']);
   }
 
   @override

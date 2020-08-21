@@ -20,4 +20,10 @@ class LocalDataSouce {
     var object = json.decode(jsonString)['data']['surahs'][number - 1];
     return Surah.fromJson(object);
   }
+
+  Future<Chapter> getDetailChapter(int id) async {
+    var jsonString = await rootBundle.loadString('assets/quran.json');
+    var object = json.decode(jsonString)['chapters'][id - 1];
+    return Chapter.fromJson(object);
+  }
 }

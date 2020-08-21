@@ -23,4 +23,9 @@ class QuranRepository implements QuranDataSource {
   Future<List<Chapter>> getListChapters() async {
     return await localDataSouce.getListChapters();
   }
+
+  @override
+  Future<Chapter> getDetailChapter(int id) async {
+    return await localDataSouce.getDetailChapter(id);
+  }
 }
