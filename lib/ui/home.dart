@@ -8,7 +8,7 @@ import 'package:get/route_manager.dart';
 class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    context.bloc<ChapterBloc>().add(FetchEvent());
+    context.watch<ChapterBloc>().add(FetchEvent());
     return Scaffold(
       appBar: AppBar(
         title: Text("Al Quran"),
@@ -16,7 +16,7 @@ class Home extends StatelessWidget {
       body: BlocConsumer<ChapterBloc, BaseState>(
         listener: (context, state) {
           if (state is EmptyState) {
-            context.bloc<ChapterBloc>().add(FetchEvent());
+            context.watch<ChapterBloc>().add(FetchEvent());
           }
         },
         builder: (context, state) {
@@ -79,7 +79,7 @@ class Home extends StatelessWidget {
                   RaisedButton(
                     child: Text("Refresh"),
                     onPressed: () =>
-                        context.bloc<ChapterBloc>().add(FetchEvent()),
+                        context.watch<ChapterBloc>().add(FetchEvent()),
                   )
                 ],
               ),

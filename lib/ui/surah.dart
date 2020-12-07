@@ -11,7 +11,7 @@ class SurahLayout extends StatelessWidget {
   final int _id = int.parse(Get.parameters['id']);
   @override
   Widget build(BuildContext context) {
-    context.bloc<VerseBloc>().add(ChapterEvent(id: _id));
+    context.watch<VerseBloc>().add(ChapterEvent(id: _id));
     return Scaffold(
         appBar: AppBar(
           title: Text(_name),
@@ -19,7 +19,7 @@ class SurahLayout extends StatelessWidget {
         body: BlocConsumer<VerseBloc, BaseState>(
           listener: (context, state) {
             if (state is EmptyState) {
-              context.bloc<VerseBloc>().add(ChapterEvent(id: _id));
+              context.watch<VerseBloc>().add(ChapterEvent(id: _id));
             }
           },
           builder: (context, state) {
@@ -31,11 +31,6 @@ class SurahLayout extends StatelessWidget {
                 margin: EdgeInsets.symmetric(horizontal: 16),
                 child: Column(
                   children: [
-                    Card(
-                      child: Column(
-                        children: [Text(state.data.nameSimple)],
-                      ),
-                    ),
                     Expanded(
                       child: ListView.separated(
                         separatorBuilder: (context, index) => Divider(),
